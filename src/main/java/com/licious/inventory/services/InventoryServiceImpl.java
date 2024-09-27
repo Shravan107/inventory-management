@@ -1,7 +1,7 @@
 package com.licious.inventory.services;
 
-import com.licious.inventory.dto.InventoryRequestDTO;
-import com.licious.inventory.dto.InventoryResponseDTO;
+import com.licious.inventory.dto.InventoryRequest;
+import com.licious.inventory.dto.InventoryResponse;
 import com.licious.inventory.entities.Inventory;
 import com.licious.inventory.entities.InventoryTransaction;
 import com.licious.inventory.exceptions.ConcurrencyException;
@@ -35,7 +35,7 @@ public class InventoryServiceImpl implements InventoryService {
     // Method to add inventory when restocking or returns.
     @Transactional
     @Override
-    public synchronized InventoryResponseDTO addInventory(InventoryRequestDTO request) {
+    public synchronized InventoryResponse addInventory(InventoryRequest request) {
         try {
             Optional<Inventory> inventoryOpt = inventoryRepository.findById(request.getProductId());
             if (inventoryOpt.isEmpty()) {
@@ -52,7 +52,7 @@ public class InventoryServiceImpl implements InventoryService {
             inventoryRepository.save(inventory);
 
             logTransaction(request.getProductId(), TransactionType.ADDITION, request.getQuantity());
-            return new InventoryResponseDTO("Inventory added successfully.");
+            return new InventoryResponse("Inventory added successfully.");
         } catch (OptimisticLockException e) {
             throw new ConcurrencyException("Inventory was updated by another transaction. Please retry.");
         }
@@ -62,7 +62,7 @@ public class InventoryServiceImpl implements InventoryService {
     // Method to deduct inventory when order fulfillment.
     @Transactional
     @Override
-    public synchronized InventoryResponseDTO deductInventory(InventoryRequestDTO request) {
+    public synchronized InventoryResponse deductInventory(InventoryRequest request) {
         try {
             Optional<Inventory> inventoryOpt = inventoryRepository.findById(request.getProductId());
             if (inventoryOpt.isEmpty()) {
@@ -79,9 +79,9 @@ public class InventoryServiceImpl implements InventoryService {
 
             logTransaction(request.getProductId(), TransactionType.DEDUCTION, request.getQuantity());
 
-            return new InventoryResponseDTO("Inventory deducted successfully.");
+            return new InventoryResponse("Inventory deducted successfully.");
         } catch (OptimisticLockException e) {
-            return new InventoryResponseDTO("Inventory was deducted by another transaction. Please retry.");
+            return new InventoryResponse("Inventory was deducted by another transaction. Please retry.");
         }
     }
 

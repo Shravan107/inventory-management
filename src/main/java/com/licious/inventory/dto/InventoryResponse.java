@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class InventoryResponseDTO {
+public class InventoryResponse {
     private String message;
 }

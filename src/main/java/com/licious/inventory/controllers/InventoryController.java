@@ -1,7 +1,7 @@
 package com.licious.inventory.controllers;
 
-import com.licious.inventory.dto.InventoryRequestDTO;
-import com.licious.inventory.dto.InventoryResponseDTO;
+import com.licious.inventory.dto.InventoryRequest;
+import com.licious.inventory.dto.InventoryResponse;
 import com.licious.inventory.entities.Inventory;
 import com.licious.inventory.entities.InventoryTransaction;
 import com.licious.inventory.services.InventoryService;
@@ -26,14 +26,14 @@ public class InventoryController {
     InventoryService inventoryService;
 
     @PostMapping("/add")
-    public ResponseEntity<InventoryResponseDTO> addInventory(@RequestBody InventoryRequestDTO request) {
-        InventoryResponseDTO response = inventoryService.addInventory(request);
+    public ResponseEntity<InventoryResponse> addInventory(@RequestBody InventoryRequest request) {
+        InventoryResponse response = inventoryService.addInventory(request);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/deduct")
-    public ResponseEntity<InventoryResponseDTO> deductInventory(@RequestBody InventoryRequestDTO request) {
-        InventoryResponseDTO response = inventoryService.deductInventory(request);
+    public ResponseEntity<InventoryResponse> deductInventory(@RequestBody InventoryRequest request) {
+        InventoryResponse response = inventoryService.deductInventory(request);
         return ResponseEntity.ok(response);
     }
 

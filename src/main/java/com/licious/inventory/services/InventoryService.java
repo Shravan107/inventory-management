@@ -1,7 +1,7 @@
 package com.licious.inventory.services;
 
-import com.licious.inventory.dto.InventoryRequestDTO;
-import com.licious.inventory.dto.InventoryResponseDTO;
+import com.licious.inventory.dto.InventoryRequest;
+import com.licious.inventory.dto.InventoryResponse;
 import com.licious.inventory.entities.Inventory;
 import com.licious.inventory.entities.InventoryTransaction;
 
@@ -14,14 +14,14 @@ public interface InventoryService {
      * @param request InventoryRequestDTO object.
      * @return InventoryResponseDTO object.
      **/
-    InventoryResponseDTO addInventory(InventoryRequestDTO request);
+    InventoryResponse addInventory(InventoryRequest request);
 
     /**
      * Method to deduct inventory.
      * @param request InventoryRequestDTO object.
      * @return InventoryResponseDTO object.
      **/
-    InventoryResponseDTO deductInventory(InventoryRequestDTO request);
+    InventoryResponse deductInventory(InventoryRequest request);
 
     /**
      * Method to get all inventory data.

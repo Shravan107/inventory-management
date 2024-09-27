@@ -1,6 +1,6 @@
 package com.licious.inventory.services;
 
-import com.licious.inventory.dto.ProductResponseDTO;
+import com.licious.inventory.dto.ProductResponse;
 import com.licious.inventory.entities.Product;
 import com.licious.inventory.exceptions.ProductNotFoundException;
 import com.licious.inventory.repositories.ProductRepository;
@@ -18,19 +18,19 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private  ProductRepository productRepository;
 
-    public ProductResponseDTO getProductById(Long productId) {
+    public ProductResponse getProductById(Long productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id " + productId));
         return mapToDTO(product);
     }
 
-    public List<ProductResponseDTO> getAllProducts() {
+    public List<ProductResponse> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    private ProductResponseDTO mapToDTO(Product product) {
-        ProductResponseDTO productResponseDTO = new ProductResponseDTO();
+    private ProductResponse mapToDTO(Product product) {
+        ProductResponse productResponseDTO = new ProductResponse();
         productResponseDTO.setId(product.getId());
         productResponseDTO.setName(product.getName());
         productResponseDTO.setPrice(product.getPrice());
