@@ -11,6 +11,7 @@ public interface InventoryService {
 
     /**
      * Method to add inventory.
+     *
      * @param request InventoryRequestDTO object.
      * @return InventoryResponseDTO object.
      **/
@@ -18,6 +19,7 @@ public interface InventoryService {
 
     /**
      * Method to deduct inventory.
+     *
      * @param request InventoryRequestDTO object.
      * @return InventoryResponseDTO object.
      **/
@@ -25,12 +27,21 @@ public interface InventoryService {
 
     /**
      * Method to get all inventory data.
+     *
      * @return List of Inventory objects.
      **/
     List<Inventory> getAllInventory();
 
     /**
+     * Method to get inventory by product id.
+     * @param productId Long object.
+     * @return Inventory object.
+     **/
+    Inventory getInventory(Long productId);
+
+    /**
      * Method to get transactions by product id.
+     *
      * @param productId Long object.
      * @return List of InventoryTransaction objects.
      **/
@@ -38,9 +49,9 @@ public interface InventoryService {
 
     /**
      * Method to get all transactions.
+     *
      * @return List of InventoryTransaction objects.
      **/
     List<InventoryTransaction> getAllTransactions();
-
 
 }

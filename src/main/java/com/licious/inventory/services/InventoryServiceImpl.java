@@ -35,7 +35,7 @@ public class InventoryServiceImpl implements InventoryService {
     // Method to add inventory when restocking or returns.
     @Transactional
     @Override
-    public synchronized InventoryResponse addInventory(InventoryRequest request) {
+    public InventoryResponse addInventory(InventoryRequest request) {
         try {
             Optional<Inventory> inventoryOpt = inventoryRepository.findById(request.getProductId());
             if (inventoryOpt.isEmpty()) {
@@ -62,7 +62,7 @@ public class InventoryServiceImpl implements InventoryService {
     // Method to deduct inventory when order fulfillment.
     @Transactional
     @Override
-    public synchronized InventoryResponse deductInventory(InventoryRequest request) {
+    public InventoryResponse deductInventory(InventoryRequest request) {
         try {
             Optional<Inventory> inventoryOpt = inventoryRepository.findById(request.getProductId());
             if (inventoryOpt.isEmpty()) {
@@ -93,6 +93,16 @@ public class InventoryServiceImpl implements InventoryService {
         }
 
         return inventoryList;
+    }
+
+    public Inventory getInventory(Long productId) {
+        Optional<Inventory> inventoryOpt = inventoryRepository.findById(productId);
+
+        if (inventoryOpt.isEmpty()) {
+            throw new InventoryNotFoundException("No inventory data found for product id " + productId);
+        }
+
+        return inventoryOpt.get();
     }
 
     public List<InventoryTransaction> getTransactionsByProductId(Long productId) {
