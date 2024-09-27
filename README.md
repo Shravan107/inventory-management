@@ -190,7 +190,7 @@ Sample Response:
 ]
 ```
 
-- #### Get single the product
+- #### Get single product
 This API is used to deduct quantity for a product in inventory when there product fulfillment.
 | Endpoint | Response Format |
 | :--- | :--- |
