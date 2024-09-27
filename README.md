@@ -36,7 +36,7 @@ Before you make use of the service, Please ensure the below tools and technologi
     ```bash
     cd inventory-management
 
-3. Use pgAdmin GUI or terminal and create new DB connection and update the connection string in resources/application.properties file.
+3. Use pgAdmin GUI or terminal and create new DB connection and update the connection string in resources/application.properties file or store in environment variables.
    
 5. Build the project using Maven:
     ```bash
