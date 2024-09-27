@@ -211,6 +211,12 @@ Sample Response:
     "maxQuantity": 100
 }
 ```
+#### Status codes
+- `400`: Bad request, Insufficient stock availability & Exceeds maximum allowed inventory.
+- `404`: Product not found.
+- `409`: Conflict/resource already updated.
+- `500`: Other errors.
+  
 ## Design Notes
 - Singleton pattern applied at the service layer via Spring's default bean scope, repository pattern for abstracting data access and Transactional pattern to ensure atomic and consistent operations.
 - Optimistic Locking mechanisim with @Version is used for concurrency management.
