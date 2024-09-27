@@ -219,6 +219,6 @@ Sample Response:
   
 ## Design Notes
 - Singleton pattern applied at the service layer via Spring's default bean scope, repository pattern for abstracting data access and Transactional pattern to ensure atomic and consistent operations.
+- Ensure that only one thread can modify the inventory or process a request at a time and thread saftey using synchronized blocks, But better to avoid synchronized in high-concurrency systems as it reduces throughput and introduces performance bottlenecks.
 - Optimistic Locking mechanisim with @Version is used for concurrency management.
-- Ensure that only one thread can modify the inventory or process a request at a time and thread saftey using synchronized blocks.
 - @Transactional annotation was used in service layer for data consistency and integrity.
